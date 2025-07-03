@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha Seu Pacote X.0 | RevenueX.0</title>
+
+    <!-- Inclusão das Tipografias (Google Fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Sora:wght@600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* 🎨 2. VISUAL DESIGN & ESTILO (CSS customizado) */
+
+        :root {
+            /* Paleta Oficial X.0 */
+            --azul-royal: #1E3A8A;
+            --ciano-x0: #06B6D4;
+            --verde-growth: #10B981;
+            --amarelo-energia: #FACC15;
+            --cinza-nevoeiro: #F3F4F6;
+            --cinza-concreto: #6B7280;
+            --preto-carbono: #0D0D0D;
+            --branco-puro: #FFFFFF;
+
+            /* Tipografias */
+            --font-display: 'Space Grotesk', sans-serif; /* Para títulos de destaque, CTAs, números */
+            --font-primaria: 'Sora', sans-serif;          /* Para headings principais */
+            --font-secundaria: 'Inter', sans-serif;       /* Para corpo de texto */
+            
+            /* Layout */
+            --section-padding: 64px;
+            --component-gap: 24px;
+        }
+
+        /* Reset e Configurações Globais */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-secundaria);
+            background-color: var(--branco-puro);
+            color: var(--preto-carbono);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: var(--section-padding) 0;
+            overflow: hidden; 
+        }
+        
+        /* Animação de entrada com IntersectionObserver */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Componentes de UI */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--azul-royal);
+            color: var(--branco-puro);
+        }
+        .btn-primary:hover {
+            background-color: var(--ciano-x0);
+            transform: scale(1.05);
+        }
+        
+        .btn-secondary {
+            background-color: var(--ciano-x0);
+            color: var(--branco-puro);
+        }
+        .btn-secondary:hover {
+            background-color: var(--azul-royal);
+            transform: scale(1.05);
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-primaria);
+            font-weight: 700;
+            color: var(--preto-carbono);
+        }
+        
+        h1 { font-family: var(--font-display); font-size: 3.2rem; line-height: 1.2; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: var(--component-gap); }
+        h3 { font-size: 1.6rem; }
+
+        /* 🔹 1. LAYOUT E ESTRUTURA FUNCIONAL (Estilos por seção) */
+        
+        /* Header (Hero) */
+        .hero {
+            background-color: var(--cinza-nevoeiro);
+            text-align: center;
+            padding: 80px 0;
+        }
+        .logo-img {
+            max-height: 60px;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            color: var(--azul-royal);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .hero .subheadline {
+            font-size: 1.2rem;
+            color: var(--cinza-concreto);
+            margin: 16px auto 32px;
+            max-width: 600px;
+        }
+        .hero .visual-placeholder {
+            width: 100%;
+            max-width: 600px;
+            height: 350px;
+            background: linear-gradient(145deg, #e0e5ec, #ffffff);
+            box-shadow: 10px 10px 20px #d1d9e6, -10px -10px 20px #ffffff;
+            margin: 40px auto 0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cinza-concreto);
+            font-style: italic;
+        }
+
+        /* Pacotes Prontos */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--component-gap);
+        }
+        .package-card {
+            background-color: var(--branco-puro);
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .package-card.highlight {
+            border: 2px solid var(--ciano-x0);
+            position: relative;
+        }
+        .package-card.highlight::before {
+            content: 'MAIS POPULAR';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--amarelo-energia);
+            color: var(--preto-carbono);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: var(--font-display);
+        }
+        .package-card h3 { color: var(--azul-royal); margin-bottom: 16px; }
+        .package-card ul { list-style: none; margin: 20px 0; color: var(--cinza-concreto); }
+        .package-card ul li { margin-bottom: 8px; }
+        .package-card .benefit { font-weight: 700; margin: 24px 0; min-height: 40px; }
+
+        /* Monte Seu Próprio Pacote */
+        #custom-builder { background-color: var(--cinza-nevoeiro); }
+        .module-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+        .module-card {
+            background-color: var(--branco-puro);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .module-card input { display: none; }
+        .module-card.selected {
+            border-color: var(--ciano-x0);
+            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.2);
+        }
+        .module-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-primaria);
+        }
+        .module-icon {
+            width: 22px;
+            height: 22px;
+            color: var(--azul-royal);
+            flex-shrink: 0;
+        }
+        .custom-total { text-align: center; margin-top: 32px; }
+        .custom-total .price {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            color: var(--verde-growth);
+        }
+
+        /* Comparativo de Funcionalidades */
+        .table-responsive-wrapper { overflow-x: auto; }
+        .comparison-table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+            margin-top: var(--component-gap);
+        }
+        .comparison-table th, .comparison-table td { padding: 16px; text-align: left; border-bottom: 1px solid #e0e0e0; }
+        .comparison-table th { font-family: var(--font-primaria); background-color: var(--cinza-nevoeiro); }
+        .comparison-table tr:nth-child(even) { background-color: var(--cinza-nevoeiro); }
+        .comparison-table .check { color: var(--verde-growth); font-weight: 700; font-size: 1.2rem; }
+        .comparison-table .cross { color: var(--cinza-concreto); font-size: 1.2rem; }
+
+        /* Depoimentos + Mini Case */
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--component-gap); margin-bottom: 40px; }
+        .testimonial-card { background: var(--cinza-nevoeiro); padding: 24px; border-radius: 12px; }
+        .testimonial-card .author { display: flex; align-items: center; margin-top: 16px; }
+        .testimonial-card .avatar { width: 50px; height: 50px; border-radius: 50%; background-color: #ccc; margin-right: 12px; }
+        .case-study { background: var(--azul-royal); color: var(--branco-puro); padding: 40px; border-radius: 12px; text-align: center; }
+        .case-study h3 { color: var(--branco-puro); }
+
+        /* Contador de Pacotes Ativados */
+        .sales-counter { text-align: center; font-size: 1.4rem; color: var(--cinza-concreto); }
+        .sales-counter .number { font-family: var(--font-display); font-size: 3.5rem; color: var(--verde-growth); font-weight: 700; }
+
+        /* CTA Final & Selo de Confiança */
+        #final-cta { background-color: var(--cinza-nevoeiro); text-align: center; }
+        .trust-badge {
+            background-color: #E5E7EB; /* Cor um pouco diferente para destaque */
+            color: #0D0D0D;
+            font-weight: 600;
+            padding: 12px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 0 auto 32px auto;
+            max-width: 600px;
+        }
+        .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 24px; }
+
+        /* FAQ (Dropdown) */
+        .faq-item { background: var(--cinza-nevoeiro); margin-bottom: 10px; border-radius: 8px; }
+        .faq-item summary { padding: 16px; font-weight: 700; cursor: pointer; outline: none; list-style: '❓ '; margin-left: 10px; }
+        .faq-item[open] > summary { list-style: '💬 '; }
+        .faq-item p { padding: 0 16px 16px; color: var(--cinza-concreto); }
+        
+        /* Sticky CTA Flutuante */
+        .sticky-cta {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            background: rgba(13, 13, 13, 0.9);
+            backdrop-filter: blur(5px);
+            color: var(--branco-puro);
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            transition: bottom 0.5s ease-in-out;
+            z-index: 1000;
+        }
+        .sticky-cta.visible { bottom: 0; }
+        .sticky-cta .text { font-weight: 700; font-family: var(--font-primaria); }
+        
+        /* Footer */
+        footer { text-align: center; padding: 40px 20px; background: var(--preto-carbono); color: var(--cinza-concreto); }
+        .empresa-info {
+            font-size: 0.85rem;
+            color: #9CA3AF;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        .empresa-info p {
+            margin-bottom: 8px;
+        }
+        .empresa-info a {
+            color: var(--ciano-x0);
+            text-decoration: none;
+        }
+        .empresa-info a:hover {
+            text-decoration: underline;
+        }
+        .empresa-info em {
+            color: var(--verde-growth);
+            font-weight: bold;
+        }
+        .footer-note {
+            font-size: 0.8rem;
+            font-style: italic;
+            margin-top: 16px;
+            color: var(--cinza-concreto);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Header (Hero) -->
+    <header class="hero" id="hero">
+        <div class="container animate-on-scroll">
+            <!-- 🖼️ 2. ESPAÇO PARA LOGO NO HEADER -->
+            <img src="/logo-revenuex.png" alt="Logo RevenueX.0" class="logo-img">
+
+            <h1>Ative agora o motor da sua empresa com os Pacotes X.0</h1>
+            <p class="subheadline">Escolha um plano pronto ou crie o seu com total liberdade estratégica</p>
+            <a href="#packages" class="btn btn-primary">Ver Pacotes</a>
+            <div class="visual-placeholder">Visual Placeholder</div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 2. Pacotes Prontos -->
+        <section id="packages" class="container">
+            <h2 class="animate-on-scroll">Pacotes Prontos para Decolar</h2>
+            <div class="packages-grid">
+                <div class="package-card animate-on-scroll" style="transition-delay: 0.1s;">
+                    <h3>Starter X.0</h3>
+                    <ul><li>Lead Magnet X.0</li><li>Webhook Drive</li><li>AutoMail Trigger</li></ul>
+                    <p class="benefit">Captura e resposta automática em minutos.</p>
+                    <a href="#" class="btn btn-secondary">Quero esse pacote</a>
+                </div>
+                <div class="package-card highlight animate-on-scroll" style="transition-delay: 0.2s;">
+                    <h3>Funil Pro X.0</h3>
+                    <ul><li>Conversão Turbo</li><li>AutoQualify</li><li>DataSync</li><li>WhatsBot</li></ul>
+                    <p class="benefit">Qualifica e engaja com inteligência.</p>
+                    <a href="#" class="btn btn-primary">Quero esse pacote</a>
+                </div>
+                <div class="package-card animate-on-scroll" style="transition-delay: 0.3s;">
+                    <h3>Máquina Completa X.0</h3>
+                    <ul><li>Todos os anteriores +</li><li>Ação IA Sugerida</li><li>CRM Visual</li><li>Heatmap</li></ul>
+                    <p class="benefit">Sistema completo, do clique à decisão estratégica.</p>
+                    <a href="#" class="btn btn-secondary">Quero esse pacote</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Monte Seu Próprio Pacote -->
+        <section id="custom-builder">
+            <div class="container">
+                <h2 class="animate-on-scroll">Monte Seu Próprio Pacote</h2>
+                <!-- ✅ 2. AJUSTES DE COPY E COMUNICAÇÃO -->
+                <p style="text-align: center; color: #6B7280; font-size: 0.9rem; margin-top: -12px; margin-bottom: 24px;" class="animate-on-scroll">
+                  🧠 <strong>Importante:</strong> Alguns módulos exigem plataformas externas como Make ou Vercel. Ao selecionar "Hosting X.0", esses custos estão incluídos, com suporte técnico da nossa equipe.
+                </p>
+
+                <div class="module-selector animate-on-scroll">
+                    <label class="module-card" data-value="300">
+                        <input type="checkbox" name="module">
+                        <div class="module-title-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="module-icon"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                            <strong>Landing Page HTML Essencial</strong>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #6B7280; margin-top: 8px;">Código puro (HTML+CSS), responsivo, sem imagens ou copy.</p>
+                    </label>
+                    <label class="module-card" data-value="590">
+                        <input type="checkbox" name="module">
+                        <div class="module-title-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="module-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                            <strong>Landing Page Visual PRO</strong>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #6B7280; margin-top: 8px;">Design completo com imagem, copy otimizada e estrutura de conversão.</p>
+                    </label>
+                    <label class="module-card" data-value="980">
+                        <input type="checkbox" name="module">
+                        <div class="module-title-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="module-icon"><path d="M12.22 2h-4.44a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.38"/><path d="M16 2l6 6h-6V2z"/><path d="M7.17 12.55a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/><path d="M11.17 12.55a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/><path d="M9.17 16.55a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/></svg>
+                            <strong>Landing Page Integrada X.0</strong>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #6B7280; margin-top: 8px;">Página pronta com copy, visual, integração Make/Zapier e deploy final.</p>
+                    </label>
+                    <!-- ✅ 1. NOVO MÓDULO NA SEÇÃO "MONTE SEU PACOTE" -->
+                    <label class="module-card" data-value="299">
+                        <input type="checkbox" name="module">
+                        <div class="module-title-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="module-icon"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                            <strong>Hosting X.0 (Infra Gerenciada)</strong>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #6B7280; margin-top: 8px;">
+                            Hospedagem, Make.com até 10k ops/mês, GitHub, suporte técnico. <br><strong>R$ 299/mês ou R$ 197 no plano semestral.</strong>
+                        </p>
+                    </label>
+                    <label class="module-card" data-value="120"><input type="checkbox" name="module"><div class="module-title-wrapper"><strong>Integrações (Make, Webhook)</strong></div></label>
+                    <label class="module-card" data-value="250"><input type="checkbox" name="module"><div class="module-title-wrapper"><strong>IA e Qualificação</strong></div></label>
+                    <label class="module-card" data-value="180"><input type="checkbox" name="module"><div class="module-title-wrapper"><strong>CRM Notion</strong></div></label>
+                    <label class="module-card" data-value="100"><input type="checkbox" name="module"><div class="module-title-wrapper"><strong>Copywriting</strong></div></label>
+                    <label class="module-card" data-value="300"><input type="checkbox" name="module"><div class="module-title-wrapper"><strong>Consultorias</strong></div></label>
+                </div>
+                <div class="custom-total animate-on-scroll">
+                    <p>Valor do pacote personalizado:</p>
+                    <div class="price">R$ <span id="total-price">0</span>,00</div>
+                    <a href="#" class="btn btn-primary" style="margin-top: 16px;">Solicitar esse pacote</a>
+                    <!-- Placeholder para integração futura com checkout e contrato -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Comparativo de Funcionalidades -->
+        <section id="comparison" class="container">
+            <h2 class="animate-on-scroll">Comparativo de Funcionalidades</h2>
+            <div class="table-responsive-wrapper animate-on-scroll">
+                <table class="comparison-table">
+                    <thead><tr><th>Funcionalidade</th><th>Starter</th><th>Pro</th><th>Completa</th></tr></thead>
+                    <tbody>
+                        <tr><td>Página de Captura</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Copy Otimizada</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Integração com Make/IA</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>CRM Visual (Notion)</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td>Vídeo VSL</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td></tr>
+                        <tr><td>Ação IA Recomendada</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 5. Depoimentos + Mini Case -->
+        <section id="testimonials" class="container">
+            <h2 class="animate-on-scroll">Resultados que Falam por Si</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card animate-on-scroll" style="transition-delay: 0.1s;"><p>"A ferramenta transformou nosso processo de captação. Incrível!"</p><div class="author"><div class="avatar"></div><span><strong>João Silva</strong>, CEO InovaTech</span></div></div>
+                <div class="testimonial-card animate-on-scroll" style="transition-delay: 0.2s;"><p>"O AutoQualify economizou horas do nosso time comercial."</p><div class="author"><div class="avatar"></div><span><strong>Maria Oliveira</strong>, Dir. Vendas</span></div></div>
+                <div class="testimonial-card animate-on-scroll" style="transition-delay: 0.3s;"><p>"Com o CRM Visual, nossa organização de leads melhorou 200%."</p><div class="author"><div class="avatar"></div><span><strong>Carlos Pereira</strong>, Ger. Marketing</span></div></div>
+            </div>
+            <div class="case-study animate-on-scroll"><h3>Mini Case: Empresa ABC</h3><p>Antes: 50 leads/mês, 5% conversão. <br> <strong>Depois (Funil Pro): 150 leads/mês, 15% conversão.</strong></p></div>
+        </section>
+
+        <!-- 6. Contador de Pacotes Ativados -->
+        <section id="counter" class="container">
+             <div class="sales-counter animate-on-scroll">
+                <div class="number" id="sales-count">0</div>
+                Pacotes Ativados e Gerando Resultados
+            </div>
+        </section>
+
+        <!-- 7. CTA Final -->
+        <section id="final-cta">
+            <div class="container animate-on-scroll">
+                <div class="trust-badge">
+                    <p>🔒 Compra Segura | ALSHAM registrada no Brasil – CNPJ 59.332.265/0001-30</p>
+                </div>
+                <h2>Pronto para ativar sua máquina de vendas X.0?</h2>
+                <div class="cta-buttons">
+                    <a href="#packages" class="btn btn-primary">Quero Pacote Pronto</a>
+                    <a href="#custom-builder" class="btn btn-secondary">Montar Meu Combo</a>
+                    <a href="#" class="btn btn-primary">Falar com Consultor</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. FAQ (Dropdown) -->
+        <section id="faq" class="container">
+            <h2 class="animate-on-scroll">Perguntas Frequentes</h2>
+            <div class="animate-on-scroll">
+                <details class="faq-item"><summary>Como funciona a integração?</summary><p>Nossas integrações são feitas via Webhook e Make.com, permitindo conectar com mais de 1000 ferramentas de forma simples e visual.</p></details>
+                <details class="faq-item"><summary>Preciso de conhecimento técnico?</summary><p>Não! A plataforma foi desenhada para ser intuitiva. Para configurações mais avançadas, oferecemos suporte e consultoria.</p></details>
+                <details class="faq-item"><summary>O que é a "Ação IA Sugerida"?</summary><p>É um recurso do plano Máquina Completa que usa IA para analisar o comportamento dos leads e sugerir as próximas ações de marketing ou vendas para maximizar a conversão.</p></details>
+                <details class="faq-item">
+                    <summary>Quais os prazos de entrega dos serviços?</summary>
+                    <p>
+                        - HTML Essencial: até 2 dias úteis<br>
+                        - Visual PRO: até 4 dias úteis<br>
+                        - Página Integrada X.0: até 7 dias úteis<br>
+                        - Automações/Funil: 3 a 5 dias úteis<br>
+                        - Consultorias: agendamento em até 48h
+                    </p>
+                </details>
+                <!-- ✅ 3. AJUSTES FINAIS - FAQ -->
+                <details class="faq-item">
+                    <summary>O que está incluso no Hosting X.0?</summary>
+                    <p>
+                        O plano de infraestrutura gerenciada inclui: hospedagem de alta performance (Vercel/Netlify), conta Make.com com capacidade para até 10.000 operações por mês, repositório privado no GitHub para versionamento do seu código e suporte técnico prioritário para questões de infraestrutura.
+                    </p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <!-- 9. Sticky CTA Flutuante -->
+    <div class="sticky-cta" id="sticky-cta">
+        <span class="text">Pronto para começar?</span>
+        <a href="#final-cta" class="btn btn-secondary">Escolha Seu Pacote</a>
+    </div>
+
+    <!-- 10. Footer com assinatura da marca -->
+    <footer>
+        <div class="container">
+            <div class="empresa-info">
+                <p><strong>Empresa:</strong> ALSHAM GLOBAL COMMERCE LTDA</p>
+                <p><strong>CNPJ:</strong> 59.332.265/0001-30</p>
+                <p><strong>Contato:</strong> 
+                    <a href="https://wa.me/551152414260" target="_blank">+55 11 5241-4260</a> | 
+                    <a href="https://wa.me/5563992428800" target="_blank">+55 63 99242-8800</a>
+                </p>
+                <p><strong>Email:</strong> alsham.admin@alshamglobal.com.br</p>
+                <p><em>Compra Segura – Empresa legalmente registrada no Brasil</em></p>
+            </div>
+            <!-- ✅ 3. AJUSTES FINAIS - Footer Note -->
+            <p class="footer-note">“WhatsApp Business API não incluso. Contratação à parte pelo cliente.”</p>
+            <p>&copy; 2025 - Fabricator X.0 - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+    // 🧠 3. LÓGICA JS ESSENCIAL
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // Builder de Pacote Interativo
+        const moduleCards = document.querySelectorAll('.module-card');
+        const totalPriceEl = document.getElementById('total-price');
+        let currentTotal = 0;
+
+        moduleCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const checkbox = card.querySelector('input[type="checkbox"]');
+                const value = parseInt(card.dataset.value, 10);
+                
+                checkbox.checked = !checkbox.checked;
+                card.classList.toggle('selected', checkbox.checked);
+
+                currentTotal = Array.from(moduleCards).reduce((acc, c) => {
+                    return c.querySelector('input').checked ? acc + parseInt(c.dataset.value, 10) : acc;
+                }, 0);
+
+                totalPriceEl.textContent = currentTotal;
+            });
+        });
+
+        // Animações de Entrada com IntersectionObserver
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElements.forEach(el => observer.observe(el));
+
+        // Sticky CTA (Ativo fora do Hero)
+        const stickyCTA = document.getElementById('sticky-cta');
+        const heroSection = document.getElementById('hero');
+        const ctaObserver = new IntersectionObserver((entries) => {
+            stickyCTA.classList.toggle('visible', !entries[0].isIntersecting);
+        }, { threshold: 0.1 });
+        if(heroSection) ctaObserver.observe(heroSection);
+
+        // Contador Dinâmico com requestAnimationFrame
+        const salesCountEl = document.getElementById('sales-count');
+        const counterSection = document.getElementById('counter');
+        let animationStarted = false;
+
+        const countUp = () => {
+            const target = 742;
+            const duration = 2000; // 2 segundos
+            let start = null;
+
+            const step = (timestamp) => {
+                if (!start) start = timestamp;
+                const progress = Math.min((timestamp - start) / duration, 1);
+                const currentCount = Math.floor(progress * target);
+                salesCountEl.textContent = currentCount;
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    salesCountEl.textContent = target + "+"; // Adiciona o "+" no final
+                }
+            };
+            requestAnimationFrame(step);
+        };
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !animationStarted) {
+                animationStarted = true;
+                countUp();
+                counterObserver.unobserve(counterSection);
+            }
+        }, { threshold: 0.5 });
+        if(counterSection) counterObserver.observe(counterSection);
+    });
+    </script>
+
+</body>
+</html>
